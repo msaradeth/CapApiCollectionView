@@ -36,6 +36,20 @@ class CatVC: UIViewController {
 }
 
 
+extension CatVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // get UICollectionViewFlowLayout from collectionViewLayout
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else { return CGSize() }
+        let numberOfColumns: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2
+        let availableWidth = collectionView.bounds.width - (flowLayout.sectionInset.left + flowLayout.sectionInset.right)
+        
+        let cellWidth = availableWidth / numberOfColumns
+        return CGSize(width: cellWidth, height: 350)
+    }
+}
+
+
 extension CatVC: UICollectionViewDelegate {
     
 }
